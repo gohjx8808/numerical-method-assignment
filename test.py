@@ -1,5 +1,6 @@
 
 from fractions import Fraction
+import math
 
 def coef(x, y):
     n = len(x)
@@ -40,25 +41,53 @@ def generateFormula(x, coef):
     return formula
 
 
-def main():
-    x = input("Enter x-points (separated by space): ")
-    y = input("Enter corresponding y-points (separated by space): ")
+def determineXPoint(xList, location):
+    if location>len(xList):
+        return 'error'
+    lowerLoc=math.floor(location)
+    upperLoc=math.ceil(location)
+    lowerX=xList[lowerLoc-1]
+    higherX=xList[upperLoc-1]
+    diff=higherX-lowerX
+    pointInt=float(splitIntDec(location))
+    toBePlus=diff*pointInt
+    xPoint=lowerX+toBePlus
+    return xPoint
 
-    xList = [int(xInt) for xInt in x.split(' ')]
-    yList = [int(yInt) for yInt in y.split(' ')]
-    
+def splitIntDec(location):
+    splitted=str(location).split('.')
+    return '0.'+splitted[1]
+
+
+def convertFraction(frac):
+    if('/' in frac):
+        fracs=frac.split('/')
+        return float(fracs[0])/float(fracs[1])
+    return float(frac)
+
+def main():
+    x = input("Enter x-points (separated by comma): ")
+    y = input("Enter corresponding y-points (separated by comma): ")
+
+    xList = [convertFraction(xFloat) for xFloat in x.split(',')]
+    yList = [convertFraction(yFloat) for yFloat in y.split(',')]
+
     assert len(xList) == len(yList)
 
     coefNewton = coef(xList, yList)
     print('Final Polynomial: ' + generateFormula(xList, coefNewton))
     print('The coefficients are: '+ str([str(i) for i in coefNewton]))
     evaluate = '10'
-    while(evaluate.isnumeric()):
-        evaluate = input('Enter the x-point to be evaluated: ')
-        if(evaluate.isnumeric()):
-            evalInt = int(evaluate)
-            print('The evaluated y-point is: ' +
-                  str(Eval(coefNewton, xList, evalInt)))
+    while(evaluate.isalpha()==False):
+        evaluate = input('Enter the location to be evaluated (Character to quit): ')
+        if(evaluate.isalpha()==False):
+            evalInt = convertFraction(evaluate)
+            xPoint=determineXPoint(xList,evalInt)
+            if xPoint=='error':
+                print('The location exceeds the length of the input list given. Please select another location.')
+            else:
+                print('The x-point at the location is: '+str(xPoint))
+                print('The evaluated corresponding y-point is: '+str(Eval(coefNewton, xList, xPoint)))
 
 
 if __name__ == '__main__':

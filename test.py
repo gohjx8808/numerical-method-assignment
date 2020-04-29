@@ -46,6 +46,9 @@ def main():
 
     xList = [int(xInt) for xInt in x.split(' ')]
     yList = [int(yInt) for yInt in y.split(' ')]
+    
+    assert len(xList) == len(yList)
+
     coefNewton = coef(xList, yList)
     print('Final Polynomial: ' + generateFormula(xList, coefNewton))
     print('The coefficients are: '+ str([str(i) for i in coefNewton]))

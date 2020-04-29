@@ -42,12 +42,12 @@ def generateFormula(x, coef):
 
 
 def determineXPoint(xList, location):
-    if location>len(xList):
+    if location>len(xList)-1:
         return 'error'
     lowerLoc=math.floor(location)
     upperLoc=math.ceil(location)
-    lowerX=xList[lowerLoc-1]
-    higherX=xList[upperLoc-1]
+    lowerX=xList[lowerLoc]
+    higherX=xList[upperLoc]
     diff=higherX-lowerX
     pointInt=float(splitIntDec(location))
     toBePlus=diff*pointInt

@@ -25,9 +25,9 @@ def generateFormula(x,coef):
     for i in range(1,len(coef),1):
         if (coef[i] != 0):
             if(coef[i]<0):
-                formula += '-'
+                formula += ' - '
             else:
-                formula += '+'
+                formula += ' + '
             formula+='{}'.format(coef[i])
             for j in range(i):
                 formula+='(x-{})'.format(x[j])
@@ -35,12 +35,17 @@ def generateFormula(x,coef):
 
 
 
-x=input("Enter a list of x-coordinates (separated by space):")
-y=input("Enter a list of corresponding y-coordinates (separated by space):")
+x=input("Enter a list of x-points (separated by space): ")
+y=input("Enter a list of corresponding y-points (separated by space): ")
 
 xList=[int(xInt) for xInt in x.split(' ')]
 yList=[int(yInt) for yInt in y.split(' ')]
-abc=coef(xList,yList)
-print(generateFormula(xList,abc))
-print(abc)
-print(Eval(abc,xList,100))
+coefNewton=coef(xList,yList)
+print('Final Polynomial: '+generateFormula(xList,coefNewton))
+print('The coefficients are: '+str(coefNewton))
+evaluate='10'
+while(evaluate.isnumeric()):
+    evaluate=input('Enter the x-point to be evaluated: ')
+    if(evaluate.isnumeric()):
+        evalInt=int(evaluate)
+        print('The evaluated y-point is: '+str(Eval(coefNewton,xList,evalInt)))

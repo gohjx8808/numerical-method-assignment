@@ -20,8 +20,19 @@ def Eval(a, x, r):
         sum+=a[i]*temp
     return sum # return the y_value interpolation
 
+def generateFormula(x,coef):
+    firstStr=str(coef[0])
+    for i in range(1,len(coef),1):
+        if (coef[i] > 0):
+            firstStr+='+{}'.format(coef[i])
+            for j in range(i):
+                firstStr+='(x-{})'.format(x[j])
+    print(firstStr)
+
+
 x=[1,2,3,4]
 y=[1,2,3,5]
 abc=coef(x,y)
+generateFormula(x,abc)
 print(abc)
 print(Eval(abc,x,100))

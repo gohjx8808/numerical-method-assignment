@@ -34,9 +34,13 @@ def generateFormula(x,coef):
     return formula
 
 
-x=[1,2,3,4]
-y=[1,2,3,4]
-abc=coef(x,y)
-print(generateFormula(x,abc))
+
+x=input("Enter a list of x-coordinates (separated by space):")
+y=input("Enter a list of corresponding y-coordinates (separated by space):")
+
+xList=[int(xInt) for xInt in x.split(' ')]
+yList=[int(yInt) for yInt in y.split(' ')]
+abc=coef(xList,yList)
+print(generateFormula(xList,abc))
 print(abc)
-print(Eval(abc,x,100))
+print(Eval(abc,xList,100))

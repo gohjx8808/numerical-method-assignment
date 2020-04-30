@@ -2,6 +2,7 @@
 from fractions import Fraction
 import math
 
+
 def coef(x, y):
     n = len(x)
     a = []
@@ -10,7 +11,8 @@ def coef(x, y):
 
     for j in range(1, n):
         for i in range(n-1, j-1, -1):
-            a[i] = Fraction(float(a[i]-a[i-1])/float(x[i]-x[i-j])).limit_denominator()
+            a[i] = Fraction(float(a[i]-a[i-1]) /
+                            float(x[i]-x[i-j])).limit_denominator()
 
     return a  # return an array of coefficient
 
@@ -42,28 +44,30 @@ def generateFormula(x, coef):
 
 
 def determineXPoint(xList, location):
-    if location>len(xList)-1:
+    if location > len(xList)-1:
         return 'error'
-    lowerLoc=math.floor(location)
-    upperLoc=math.ceil(location)
-    lowerX=xList[lowerLoc]
-    higherX=xList[upperLoc]
-    diff=higherX-lowerX
-    pointInt=float(splitIntDec(location))
-    toBePlus=diff*pointInt
-    xPoint=lowerX+toBePlus
+    lowerLoc = math.floor(location)
+    upperLoc = math.ceil(location)
+    lowerX = xList[lowerLoc]
+    higherX = xList[upperLoc]
+    diff = higherX-lowerX
+    pointInt = float(splitIntDec(location))
+    toBePlus = diff*pointInt
+    xPoint = lowerX+toBePlus
     return xPoint
 
+
 def splitIntDec(location):
-    splitted=str(location).split('.')
+    splitted = str(location).split('.')
     return '0.'+splitted[1]
 
 
 def convertFraction(frac):
     if('/' in frac):
-        fracs=frac.split('/')
+        fracs = frac.split('/')
         return float(fracs[0])/float(fracs[1])
     return float(frac)
+
 
 def main():
     x = input("Enter x-points (separated by comma): ")
@@ -76,18 +80,21 @@ def main():
 
     coefNewton = coef(xList, yList)
     print('Final Polynomial: ' + generateFormula(xList, coefNewton))
-    print('The coefficients are: '+ str([str(i) for i in coefNewton]))
+    print('The coefficients are: ' + str([str(i) for i in coefNewton]))
     evaluate = '10'
-    while(evaluate.isalpha()==False):
-        evaluate = input('Enter the location to be evaluated (Character to quit): ')
-        if(evaluate.isalpha()==False):
+    while(evaluate.isalpha() == False):
+        evaluate = input(
+            'Enter the location to be evaluated (Character to quit): ')
+        if(evaluate.isalpha() == False):
             evalInt = convertFraction(evaluate)
-            xPoint=determineXPoint(xList,evalInt)
-            if xPoint=='error':
-                print('The location exceeds the length of the input list given. Please select another location.')
+            xPoint = determineXPoint(xList, evalInt)
+            if xPoint == 'error':
+                print(
+                    'The location exceeds the length of the input list given. Please select another location.')
             else:
                 print('The x-point at the location is: '+str(xPoint))
-                print('The evaluated corresponding y-point is: '+str(Eval(coefNewton, xList, xPoint)))
+                print('The evaluated corresponding y-point is: ' +
+                      str(Eval(coefNewton, xList, xPoint)))
 
 
 if __name__ == '__main__':

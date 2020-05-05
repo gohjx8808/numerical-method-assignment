@@ -77,8 +77,8 @@ def main():
     data = df.T
     xList = list(data[0].values)
     yList = list(data[1].values)
-    print(xList)
-    print(yList)
+    print("X points:", xList)
+    print("Y points:", yList)
 
     # xList = [convertFraction(xFloat) for xFloat in x.split(',')]
     # yList = [convertFraction(yFloat) for yFloat in y.split(',')]

@@ -1,7 +1,7 @@
 
 from fractions import Fraction
 import math
-
+import pandas as pd
 
 def coef(x, y):
     n = len(x)
@@ -70,11 +70,18 @@ def convertFraction(frac):
 
 
 def main():
-    x = input("Enter x-points (separated by comma): ")
-    y = input("Enter corresponding y-points (separated by comma): ")
+    # x = input("Enter x-points (separated by comma): ")
+    # y = input("Enter corresponding y-points (separated by comma): ")
 
-    xList = [convertFraction(xFloat) for xFloat in x.split(',')]
-    yList = [convertFraction(yFloat) for yFloat in y.split(',')]
+    df = pd.read_csv("data.txt", header=None, sep=" ")
+    data = df.T
+    xList = list(data[0].values)
+    yList = list(data[1].values)
+    print(xList)
+    print(yList)
+
+    # xList = [convertFraction(xFloat) for xFloat in x.split(',')]
+    # yList = [convertFraction(yFloat) for yFloat in y.split(',')]
 
     assert len(xList) == len(yList)
 

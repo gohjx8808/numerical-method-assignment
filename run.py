@@ -73,12 +73,10 @@ def main():
     # x = input("Enter x-points (separated by comma): ")
     # y = input("Enter corresponding y-points (separated by comma): ")
 
-    df = pd.read_csv("data.csv", header=None, sep=" ")
+    df = pd.read_csv("data.csv", header=None)
     data = df.T
     xList = list(data[0].values)
     yList = list(data[1].values)
-    print("X points:", xList)
-    print("Y points:", yList)
 
     # xList = [convertFraction(xFloat) for xFloat in x.split(',')]
     # yList = [convertFraction(yFloat) for yFloat in y.split(',')]

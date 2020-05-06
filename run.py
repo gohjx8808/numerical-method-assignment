@@ -44,6 +44,7 @@ def generateFormula(x, coef):
 
 
 def determineXPoint(xList, location):
+    print(location)
     if location > len(xList)-1:
         return 'error'
     lowerLoc = math.floor(location)

@@ -64,9 +64,10 @@ def splitIntDec(location):
 
 
 def convertFraction(frac):
-    if('/' in frac):
-        fracs = frac.split('/')
-        return float(fracs[0])/float(fracs[1])
+    if isinstance(frac, str):
+        if('/' in frac):
+            fracs = frac.split('/')
+            return float(fracs[0])/float(fracs[1])
     return float(frac)
 
 
@@ -76,11 +77,9 @@ def main():
 
     df = pd.read_csv("data.csv", header=None)
     data = df.T
-    xList = list(data[0].values)
-    yList = list(data[1].values)
-
-    # xList = [convertFraction(xFloat) for xFloat in x.split(',')]
-    # yList = [convertFraction(yFloat) for yFloat in y.split(',')]
+    
+    xList = [convertFraction(xFloat) for xFloat in data[0].values]
+    yList = [convertFraction(yFloat) for yFloat in list(data[1].values)]
 
     assert len(xList) == len(yList)
 

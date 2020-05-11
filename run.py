@@ -86,10 +86,15 @@ def main():
     coefNewton = coef(xList, yList)
     print('Final Polynomial: ' + generateFormula(xList, coefNewton))
     print('The coefficients are: ' + str([str(i) for i in coefNewton]))
-    evaluate = '10'
-    while(evaluate.isalpha() == False):
-        evaluate = input(
-            'Enter the location to be evaluated (Character to quit): ')
+    choice=input('Please choose x-point or location to be evaluate (0: x-point, 1: location): ')
+    if (int(choice) == 0):
+        evaluate = input('Enter the x-point to be evaluated: ')
+        if (evaluate.isalpha() == False):
+            evalInt = convertFraction(evaluate)
+            print('The evaluated corresponding y-point is: ' +
+                  str(Eval(coefNewton, xList, evalInt)))
+    elif(int(choice)==1):
+        evaluate = input('Enter the location to be evaluated: ')
         if(evaluate.isalpha() == False):
             evalInt = convertFraction(evaluate)
             xPoint = determineXPoint(xList, evalInt)
@@ -99,8 +104,7 @@ def main():
             else:
                 print('The x-point at the location is: '+str(xPoint))
                 print('The evaluated corresponding y-point is: ' +
-                      str(Eval(coefNewton, xList, xPoint)))
-
+                        str(Eval(coefNewton, xList, xPoint)))
 
 if __name__ == '__main__':
     main()

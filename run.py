@@ -87,24 +87,29 @@ def main():
     print('Final Polynomial: ' + generateFormula(xList, coefNewton))
     print('The coefficients are: ' + str([str(i) for i in coefNewton]))
     choice=input('Please choose x-point or location to be evaluate (0: x-point, 1: location): ')
-    if (int(choice) == 0):
-        evaluate = input('Enter the x-point to be evaluated: ')
-        if (evaluate.isalpha() == False):
-            evalInt = convertFraction(evaluate)
-            print('The evaluated corresponding y-point is: ' +
-                  str(Eval(coefNewton, xList, evalInt)))
-    elif(int(choice)==1):
-        evaluate = input('Enter the location to be evaluated: ')
-        if(evaluate.isalpha() == False):
-            evalInt = convertFraction(evaluate)
-            xPoint = determineXPoint(xList, evalInt)
-            if xPoint == 'error':
-                print(
-                    'The location exceeds the length of the input list given. Please select another location.')
-            else:
-                print('The x-point at the location is: '+str(xPoint))
+    try:
+        if (int(choice) == 0):
+            evaluate = input('Enter the x-point to be evaluated: ')
+            if (evaluate.isalpha() == False):
+                evalInt = convertFraction(evaluate)
                 print('The evaluated corresponding y-point is: ' +
-                        str(Eval(coefNewton, xList, xPoint)))
+                      str(Eval(coefNewton, xList, evalInt)))
+        elif(int(choice)==1):
+            evaluate = input('Enter the location to be evaluated: ')
+            if(evaluate.isalpha() == False):
+                evalInt = convertFraction(evaluate)
+                xPoint = determineXPoint(xList, evalInt)
+                if xPoint == 'error':
+                    print(
+                        'The location exceeds the length of the input list given. Please select another location.')
+                else:
+                    print('The x-point at the location is: '+str(xPoint))
+                    print('The evaluated corresponding y-point is: ' +
+                            str(Eval(coefNewton, xList, xPoint)))
+        else:
+            print('No such option!')
+    except:
+        print('Choice error!')
 
 if __name__ == '__main__':
     main()
